@@ -37,5 +37,3 @@ for i in {1..60}; do # Timeout after 5 minutes
 done
 
 kubectl get pods --namespace=knative-serving
-
-echo $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
