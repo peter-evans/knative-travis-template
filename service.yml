@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: helloworld-go
   namespace: default
-  labels:
-    app: helloworld-go
 spec:
   runLatest:
     configuration:
@@ -12,3 +10,4 @@ spec:
         spec:
           container:
             image: helloworld-go:v1
+            imagePullPolicy: Never

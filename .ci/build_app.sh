@@ -14,7 +14,7 @@ for i in {1..15}; do # Timeout after 5 minutes
   if kubectl get services.serving.knative.dev helloworld-go -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; then
     break
   fi
-  kubectl get services.serving.knative.dev helloworld-go -o jsonpath="$JSONPATH"
+  kubectl get services.serving.knative.dev helloworld-go -o json
   sleep 2
 done
 
