@@ -15,8 +15,6 @@ install:
 script:
   - kubectl cluster-info
   - echo 'Knative ingress:' $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  - eval $(minikube docker-env)
-  - echo "OK"
   - docker ps
   - docker build -t helloworld-go .
   - kubectl apply -f service.yml
