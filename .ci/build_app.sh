@@ -6,7 +6,10 @@ APP_NAME="helloworld-go"
 #docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 docker build -t helloworld-go .
-docker save helloworld-go | minikube ssh docker load
+#docker save helloworld-go | ssh docker@$(minikube ip) docker load
+docker save helloworld-go | ssh -o UserKnownHostsFile=/dev/null \
+    -o StrictHostKeyChecking=no -o LogLevel=quiet \
+    -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip) docker load
 
 #docker tag helloworld-go localhost:5000/helloworld-go
 #docker push localhost:5000/helloworld-go
