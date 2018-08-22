@@ -11,10 +11,8 @@ env:
 install:
   - source .ci/install_minikube.sh
   - source .ci/install_knative.sh
+  - kubectl cluster-info
 
 script:
-  - kubectl cluster-info
-  - echo 'Knative ingress:' $(minikube ip):$(kubectl get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-  - docker ps
-  - docker build -t helloworld-go .
-  - kubectl apply -f service.yml
+  - source .ci/build_app.sh
+  - curl -H "Host: ${HOST_URL}" http://${IP_ADDRESS}/world
