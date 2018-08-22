@@ -10,7 +10,7 @@ kubectl get pods --show-labels
 # Wait for helloworld-go to be ready
 echo "Waiting for helloworld-go to be ready ..."
 for i in {1..30}; do # Timeout after 5 minutes
-  kubectl get pods --show-labels
+  kubectl get pods --all-namespaces --show-labels
   #if kubectl get pods --namespace=istio-system -listio=pilot|grep Running ; then
   #  break
   #fi
