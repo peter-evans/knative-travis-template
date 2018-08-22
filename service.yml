@@ -9,5 +9,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: helloworld-go
-            imagePullPolicy: Never
+            image: gcr.io/knative-samples/helloworld-go
+            env:
+            - name: TARGET
+              value: "Go Sample v1"
