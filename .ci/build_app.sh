@@ -19,10 +19,11 @@ kubectl apply -f service.yml
 # Wait for helloworld-go to be ready
 echo "Waiting for helloworld-go to be ready ..."
 JSONPATH="{range .status.conditions[?(@.type=='Ready')]}{@.type}={@.status};{end}"
-for i in {1..15}; do # Timeout after 5 minutes
+for i in {1..150}; do # Timeout after 5 minutes
   if kubectl get services.serving.knative.dev helloworld-go -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; then
     break
   fi
+  kubectl get revisions -o json
   kubectl get services.serving.knative.dev helloworld-go -o json
   sleep 2
 done
