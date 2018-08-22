@@ -3,7 +3,11 @@ set -e
 
 APP_NAME="helloworld-go"
 
-docker build -t helloworld-go:v1 .
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+docker build -t helloworld-go .
+docker tag helloworld-go localhost:5000/helloworld-go
+docker push localhost:5000/helloworld-go
 
 kubectl apply -f service.yml
 
