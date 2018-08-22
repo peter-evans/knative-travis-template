@@ -11,7 +11,7 @@ kubectl get pods --show-labels
 echo "Waiting for helloworld-go to be ready ..."
 for i in {1..5}; do # Timeout after 5 minutes
   #kubectl get pods --all-namespaces --show-labels
-  kubectl get services.serving.knative.dev helloworld-go
+  kubectl get services.serving.knative.dev helloworld-go -o json
   kubectl get route
   kubectl get revisions
   #if kubectl get pods --namespace=istio-system -listio=pilot|grep Running ; then
