@@ -1,22 +1,18 @@
 #!/bin/bash
 set -e
 
-docker build -t helloworld-go .
+export APP_NAME="helloworld-go"
+
+docker build -t helloworld-go:v1 .
 
 kubectl apply -f service.yml
 
-kubectl get pods --show-labels
-
 # Wait for helloworld-go to be ready
 echo "Waiting for helloworld-go to be ready ..."
-for i in {1..5}; do # Timeout after 5 minutes
-  #kubectl get pods --all-namespaces --show-labels
-  kubectl get services.serving.knative.dev helloworld-go -o json
-  kubectl get route
-  kubectl get revisions
-  #if kubectl get pods --namespace=istio-system -listio=pilot|grep Running ; then
-  #  break
-  #fi
+for i in {1..15}; do # Timeout after 5 minutes
+  if kubectl get services.serving.knative.dev helloworld-go -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; then
+    break
+  fi
   sleep 2
 done
 

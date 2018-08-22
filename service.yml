@@ -11,5 +11,4 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: helloworld-go
-            imagePullPolicy: Never
+            image: helloworld-go:v1
