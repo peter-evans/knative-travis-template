@@ -9,5 +9,5 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: localhost:5000/helloworld-go
+            image: helloworld-go
             imagePullPolicy: Never
