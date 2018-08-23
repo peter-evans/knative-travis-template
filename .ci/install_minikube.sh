@@ -20,7 +20,10 @@ sudo -E minikube start \
   --kubernetes-version=v$KUBERNETES_VERSION \
   --vm-driver=none \
   --bootstrapper=kubeadm \
-  --alsologtostderr
+  --alsologtostderr \
+  --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
+  --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
+  --extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 
 minikube update-context
 
